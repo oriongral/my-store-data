@@ -1,4 +1,3 @@
-const { func } = require('joi');
 const { User, UserSchema } = require('./user.model');
 
 function setupModels(sequelize) {
