@@ -24,15 +24,23 @@ class UserService {
   }
 
   async update(id, changes) {
-    const user = this.findOne(id);
-    const rta = await user.update(changes);
-    return rta;
+    try {
+      const user = await this.findOne(id);
+      const rta = await user.update(changes);
+      return rta;
+    } catch (error) {
+      throw boom.notFound('User not found');
+    }
   }
 
   async delete(id) {
-    const user = this.findOne(id);
-    await user.destroy();
-    return { id };
+    try {
+      const user = await this.findOne(id);
+      await user.destroy();
+      return { id };
+    } catch (error) {
+      throw boom.notFound('User not found');
+    }
   }
 }
 
