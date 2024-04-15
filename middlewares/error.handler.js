@@ -1,5 +1,5 @@
 const { ValidationError } = require("sequelize");
-const { func } = require("joi");
+const boom = require("@hapi/boom");
 
 function logErrors (err, req, res, next) {
   console.error(err);
