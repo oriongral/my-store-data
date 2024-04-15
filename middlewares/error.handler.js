@@ -1,3 +1,5 @@
+const { func } = require("joi");
+
 function logErrors (err, req, res, next) {
   console.error(err);
   next(err);
@@ -19,5 +21,14 @@ function boomErrorHandler(err, req, res, next) {
   }
 }
 
+function ormErrorHandler(err, req, res, next) {
+  if (err instanceof ValidationError) {
+    res.status(409).json({
+      statusCode: 409,
+      message: err.errors[0].message,
+    });
+  }
+  next(err);
+}
 
-module.exports = { logErrors, errorHandler, boomErrorHandler }
+module.exports = { logErrors, errorHandler, boomErrorHandler, ormErrorHandler }
