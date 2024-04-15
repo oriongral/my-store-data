@@ -22,7 +22,7 @@ services:
       - "5050:80"
 
   mysql:
-    image: mysql:5
+    image: mysql:latest
     environment:
       - MYSQL_DATABASE=my_store
       - MYSQL_USER=root
